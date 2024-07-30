@@ -196,6 +196,11 @@ class MOMENT_PEFT_Trainer:
             self.optimizer.zero_grad()
             loss = self.criterion(output.forecast, forecast)
             loss.backward()
+            for name, parms in self.model.named_parameters():
+                print(f'name:{name}, grad_requirs:{parms.requires_grad}')
+                print(f'params:{parms}')
+                print(f'grad_value:{parms.grad}')
+                print(f'is leaf:{parms.is_leaf}\n')
             # Scales the loss for mixed precision training
             # scaler.scale(loss).backward()
 
@@ -268,7 +273,7 @@ if __name__ == '__main__':
     # LoRA
     # mode = 'LoRA'
     # mode_list = ['linear_probing', 'zero_shot', 'full_tuning', 'LoRA']
-    mode_list = ['AdaLoRA']
+    mode_list = ['LoRA']
     forecast_horizon_list = [96]
     for mode in mode_list:
         for forecast_horizon in forecast_horizon_list:

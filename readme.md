@@ -1,4 +1,4 @@
-# 环境配置
+# 配置介绍
 
 [toc]
 本章主要提供一些必要的环境配置指南，包括代码环境配置、VSCODE 代码编辑器的 Python 环境配置，以及一些使用到的其他资源配置。
@@ -169,5 +169,24 @@ cu118/torch-2.0.1%2Bcu118-cp311-cp311-win_amd64.whl
 - pip install scikit-learn -i  https://pypi.mirrors.ustc.edu.cn/simple/  注意要用pip，conda install会出毛病
 
 
-### AdaLoRA 
-- adalora.py   reset_parameters E的初始化
+# demo入口
+
+## Moment 模型运行入口
+- main.py 可直接运行
+  - from momentfm_hand.data.informer_dataset import InformerDataset  需要修改路径："/hy-tmp/data/ETT-small/ETTh1.csv" 为自己的ETTh1.csv绝对路径
+```python
+# self.model.init()
+# 把参数加载到我们的模型中去,加入后可正常训练
+load_weights(self.model)
+# 将除了lora部分的参数requires_grad=False
+mark_only_lora_as_trainable(self.model)  # 这个会导致 grad为None 加载的程序得重写
+```
+- 修改后的model：MOMENTPipeline_LORA 
+```python
+self.encoder = self._get_transformer_backbone(config)
+```
+- lora添加的位置：modeling_t5_lora.py- T5Attention
+- lora部分函数 lora_tuils
+
+## Moment Peft测试demo
+- peft_tutorials/finetune_demo/forecasting.py  可正常运行，需要修改InformerDataset路径
