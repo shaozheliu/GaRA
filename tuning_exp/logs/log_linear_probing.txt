@@ -1,0 +1,8 @@
+Loading weights from local directory
+Model initialized, training mode:  linear_probing
+Epoch 1/2
+Train loss: 0.486
+Test Loss: 0.425| Test MSE: 0.426 | Test MAE: 0.433
+Epoch 2/2
+Train loss: 0.440
+Test Loss: 0.420| Test MSE: 0.419 | Test MAE: 0.430

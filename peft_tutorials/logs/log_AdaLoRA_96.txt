@@ -1,0 +1,198 @@
+Loading weights from local directory
+Model initialized, training mode:  AdaLoRA
+MOMENTPipeline(
+  (normalizer): RevIN()
+  (tokenizer): Patching()
+  (patch_embedding): PatchEmbedding(
+    (value_embedding): Linear(in_features=8, out_features=1024, bias=False)
+    (position_embedding): PositionalEmbedding()
+    (dropout): Dropout(p=0.1, inplace=False)
+  )
+  (encoder): T5Stack(
+    (embed_tokens): Embedding(32128, 1024)
+    (block): ModuleList(
+      (0): T5Block(
+        (layer): ModuleList(
+          (0): T5LayerSelfAttention(
+            (SelfAttention): T5Attention(
+              (q): Linear(in_features=1024, out_features=1024, bias=False)
+              (k): Linear(in_features=1024, out_features=1024, bias=False)
+              (v): Linear(in_features=1024, out_features=1024, bias=False)
+              (o): Linear(in_features=1024, out_features=1024, bias=False)
+              (relative_attention_bias): Embedding(32, 16)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (1): T5LayerFF(
+            (DenseReluDense): T5DenseGatedActDense(
+              (wi_0): Linear(in_features=1024, out_features=2816, bias=False)
+              (wi_1): Linear(in_features=1024, out_features=2816, bias=False)
+              (wo): Linear(in_features=2816, out_features=1024, bias=False)
+              (dropout): Dropout(p=0.1, inplace=False)
+              (act): NewGELUActivation()
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+      (1-23): 23 x T5Block(
+        (layer): ModuleList(
+          (0): T5LayerSelfAttention(
+            (SelfAttention): T5Attention(
+              (q): Linear(in_features=1024, out_features=1024, bias=False)
+              (k): Linear(in_features=1024, out_features=1024, bias=False)
+              (v): Linear(in_features=1024, out_features=1024, bias=False)
+              (o): Linear(in_features=1024, out_features=1024, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (1): T5LayerFF(
+            (DenseReluDense): T5DenseGatedActDense(
+              (wi_0): Linear(in_features=1024, out_features=2816, bias=False)
+              (wi_1): Linear(in_features=1024, out_features=2816, bias=False)
+              (wo): Linear(in_features=2816, out_features=1024, bias=False)
+              (dropout): Dropout(p=0.1, inplace=False)
+              (act): NewGELUActivation()
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+    )
+    (final_layer_norm): T5LayerNorm()
+    (dropout): Dropout(p=0.1, inplace=False)
+  )
+  (head): ForecastingHead(
+    (flatten): Flatten(start_dim=-2, end_dim=-1)
+    (dropout): Dropout(p=0.1, inplace=False)
+    (linear): Linear(in_features=65536, out_features=96, bias=True)
+  )
+)
+AdaLoRA enabled
+trainable params: 590,112 || all params: 348,122,032 || trainable%: 0.16951297124452036
+PeftModel(
+  (base_model): AdaLoraModel(
+    (model): MOMENTPipeline(
+      (normalizer): RevIN()
+      (tokenizer): Patching()
+      (patch_embedding): PatchEmbedding(
+        (value_embedding): Linear(in_features=8, out_features=1024, bias=False)
+        (position_embedding): PositionalEmbedding()
+        (dropout): Dropout(p=0.1, inplace=False)
+      )
+      (encoder): T5Stack(
+        (embed_tokens): Embedding(32128, 1024)
+        (block): ModuleList(
+          (0): T5Block(
+            (layer): ModuleList(
+              (0): T5LayerSelfAttention(
+                (SelfAttention): T5Attention(
+                  (q): adalora.SVDLinear(
+                    (base_layer): Linear(in_features=1024, out_features=1024, bias=False)
+                    (lora_dropout): ModuleDict(
+                      (default): Dropout(p=0.05, inplace=False)
+                    )
+                    (lora_A): ParameterDict(  (default): Parameter containing: [torch.FloatTensor of size 6x1024])
+                    (lora_B): ParameterDict(  (default): Parameter containing: [torch.FloatTensor of size 1024x6])
+                    (lora_embedding_A): ParameterDict()
+                    (lora_embedding_B): ParameterDict()
+                    (lora_E): ParameterDict(  (default): Parameter containing: [torch.FloatTensor of size 6x1])
+                    (ranknum): ParameterDict(  (default): Parameter containing: [torch.FloatTensor of size 1])
+                  )
+                  (k): Linear(in_features=1024, out_features=1024, bias=False)
+                  (v): adalora.SVDLinear(
+                    (base_layer): Linear(in_features=1024, out_features=1024, bias=False)
+                    (lora_dropout): ModuleDict(
+                      (default): Dropout(p=0.05, inplace=False)
+                    )
+                    (lora_A): ParameterDict(  (default): Parameter containing: [torch.FloatTensor of size 6x1024])
+                    (lora_B): ParameterDict(  (default): Parameter containing: [torch.FloatTensor of size 1024x6])
+                    (lora_embedding_A): ParameterDict()
+                    (lora_embedding_B): ParameterDict()
+                    (lora_E): ParameterDict(  (default): Parameter containing: [torch.FloatTensor of size 6x1])
+                    (ranknum): ParameterDict(  (default): Parameter containing: [torch.FloatTensor of size 1])
+                  )
+                  (o): Linear(in_features=1024, out_features=1024, bias=False)
+                  (relative_attention_bias): Embedding(32, 16)
+                )
+                (layer_norm): T5LayerNorm()
+                (dropout): Dropout(p=0.1, inplace=False)
+              )
+              (1): T5LayerFF(
+                (DenseReluDense): T5DenseGatedActDense(
+                  (wi_0): Linear(in_features=1024, out_features=2816, bias=False)
+                  (wi_1): Linear(in_features=1024, out_features=2816, bias=False)
+                  (wo): Linear(in_features=2816, out_features=1024, bias=False)
+                  (dropout): Dropout(p=0.1, inplace=False)
+                  (act): NewGELUActivation()
+                )
+                (layer_norm): T5LayerNorm()
+                (dropout): Dropout(p=0.1, inplace=False)
+              )
+            )
+          )
+          (1-23): 23 x T5Block(
+            (layer): ModuleList(
+              (0): T5LayerSelfAttention(
+                (SelfAttention): T5Attention(
+                  (q): adalora.SVDLinear(
+                    (base_layer): Linear(in_features=1024, out_features=1024, bias=False)
+                    (lora_dropout): ModuleDict(
+                      (default): Dropout(p=0.05, inplace=False)
+                    )
+                    (lora_A): ParameterDict(  (default): Parameter containing: [torch.FloatTensor of size 6x1024])
+                    (lora_B): ParameterDict(  (default): Parameter containing: [torch.FloatTensor of size 1024x6])
+                    (lora_embedding_A): ParameterDict()
+                    (lora_embedding_B): ParameterDict()
+                    (lora_E): ParameterDict(  (default): Parameter containing: [torch.FloatTensor of size 6x1])
+                    (ranknum): ParameterDict(  (default): Parameter containing: [torch.FloatTensor of size 1])
+                  )
+                  (k): Linear(in_features=1024, out_features=1024, bias=False)
+                  (v): adalora.SVDLinear(
+                    (base_layer): Linear(in_features=1024, out_features=1024, bias=False)
+                    (lora_dropout): ModuleDict(
+                      (default): Dropout(p=0.05, inplace=False)
+                    )
+                    (lora_A): ParameterDict(  (default): Parameter containing: [torch.FloatTensor of size 6x1024])
+                    (lora_B): ParameterDict(  (default): Parameter containing: [torch.FloatTensor of size 1024x6])
+                    (lora_embedding_A): ParameterDict()
+                    (lora_embedding_B): ParameterDict()
+                    (lora_E): ParameterDict(  (default): Parameter containing: [torch.FloatTensor of size 6x1])
+                    (ranknum): ParameterDict(  (default): Parameter containing: [torch.FloatTensor of size 1])
+                  )
+                  (o): Linear(in_features=1024, out_features=1024, bias=False)
+                )
+                (layer_norm): T5LayerNorm()
+                (dropout): Dropout(p=0.1, inplace=False)
+              )
+              (1): T5LayerFF(
+                (DenseReluDense): T5DenseGatedActDense(
+                  (wi_0): Linear(in_features=1024, out_features=2816, bias=False)
+                  (wi_1): Linear(in_features=1024, out_features=2816, bias=False)
+                  (wo): Linear(in_features=2816, out_features=1024, bias=False)
+                  (dropout): Dropout(p=0.1, inplace=False)
+                  (act): NewGELUActivation()
+                )
+                (layer_norm): T5LayerNorm()
+                (dropout): Dropout(p=0.1, inplace=False)
+              )
+            )
+          )
+        )
+        (final_layer_norm): T5LayerNorm()
+        (dropout): Dropout(p=0.1, inplace=False)
+      )
+      (head): ForecastingHead(
+        (flatten): Flatten(start_dim=-2, end_dim=-1)
+        (dropout): Dropout(p=0.1, inplace=False)
+        (linear): Linear(in_features=65536, out_features=96, bias=True)
+      )
+    )
+  )
+)
+Epoch 1/1
+Train loss: 0.535

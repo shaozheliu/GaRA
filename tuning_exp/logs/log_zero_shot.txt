@@ -1,0 +1,6 @@
+Loading weights from local directory
+Model initialized, training mode:  zero_shot
+Epoch 1/2
+Test Loss: 0.716| Test MSE: 0.718 | Test MAE: 0.582
+Epoch 2/2
+Test Loss: 0.717| Test MSE: 0.718 | Test MAE: 0.582
