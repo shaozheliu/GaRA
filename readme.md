@@ -167,6 +167,7 @@ cu118/torch-2.0.1%2Bcu118-cp311-cp311-win_amd64.whl
 - pip install pandas -i  https://pypi.mirrors.ustc.edu.cn/simple/
 - conda install ipykernel
 - pip install scikit-learn -i  https://pypi.mirrors.ustc.edu.cn/simple/  注意要用pip，conda install会出毛病
+- 如果要装peft，需要手动降级一些包的版本
 
 
 # demo入口
