@@ -158,7 +158,7 @@ cu118/torch-2.0.1%2Bcu118-cp311-cp311-win_amd64.whl
 
 
 ### 虚拟环境
-# 创建 Python 3.9 的虚拟环境，位置为 /hy-tmp/myenv
+# 创建 Python 的虚拟环境，位置为 /hy-tmp/myenv
 - conda create -p /hy-tmp/sz-moment python=3.11
 - conda remove -p /hy-tmp/sz-moment --all
 - conda activate /hy-tmp/sz-moment
