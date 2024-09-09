@@ -54,7 +54,6 @@
          ```
 
       2. 初始化：
-
          ```shell
          ~/miniconda3/bin/conda init bash
          ~/miniconda3/bin/conda init zsh
@@ -160,7 +159,12 @@ cu118/torch-2.0.1%2Bcu118-cp311-cp311-win_amd64.whl
 ### 虚拟环境
 # 创建 Python 的虚拟环境，位置为 /hy-tmp/myenv
 - conda create -p /hy-tmp/sz-moment python=3.11
+- - conda create -p /hy-tmp/timellm python=3.11
+- # 设置清华源
+pip config set global.index-url https://pypi.mirrors.ustc.edu.cn/simple/
+- modelscope download --model 'skyline2006/llama-7b' --local_dir '/hy-tmp/Time-LLM/huggyllama/llama-7b'
 - conda remove -p /hy-tmp/sz-moment --all
+- conda remove -p /hy-tmp/MDD --all
 - conda activate /hy-tmp/sz-moment
 - git clone https://github.com/moment-timeseries-foundation-model/moment.git
 - pip install momentfm -i  https://pypi.mirrors.ustc.edu.cn/simple/
@@ -171,23 +175,22 @@ cu118/torch-2.0.1%2Bcu118-cp311-cp311-win_amd64.whl
 
 
 # demo入口
+# 命令行timellm
+python run_main.py --task_name long_term_forecast   --is_training 1   --root_path ./dataset/   --data_path ETTh1.csv --model_id ETTh1_512_96   --model TimeLLM   --data ETTh1   --features M   --seq_len 512   --label_len 48   --pred_len 96 --factor 3   --enc_in 7   --dec_in 7   --c_out 7   --des 'Exp'   --itr 1   --d_model 32   --d_ff 128   --batch_size 2 --learning_rate 0.01   --llm_layers 6   --train_epochs 2   --model_comment 'TimeLLM-ETTh1'
+
+
+mkdir -p ~/miniconda3
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+rm -rf ~/miniconda3/miniconda.sh
+- conda create -p /hy-tmp/timellm python=3.10
+- pip config set global.index-url https://pypi.mirrors.ustc.edu.cn/simple/
+
+
 
 ## Moment 模型运行入口
-- main.py 可直接运行
-  - from momentfm_hand.data.informer_dataset import InformerDataset  需要修改路径："/hy-tmp/data/ETT-small/ETTh1.csv" 为自己的ETTh1.csv绝对路径
-```python
-# self.model.init()
-# 把参数加载到我们的模型中去,加入后可正常训练
-load_weights(self.model)
-# 将除了lora部分的参数requires_grad=False
-mark_only_lora_as_trainable(self.model)  # 这个会导致 grad为None 加载的程序得重写
-```
-- 修改后的model：MOMENTPipeline_LORA 
-```python
-self.encoder = self._get_transformer_backbone(config)
-```
-- lora添加的位置：modeling_t5_lora.py- T5Attention
-- lora部分函数 lora_tuils
-
-## Moment Peft测试demo
-- peft_tutorials/finetune_demo/forecasting.py  可正常运行，需要修改InformerDataset路径
+- long-term
+-- EETm1  lr-5e-5  效果ok
+--  EETh1  lr: 1e-3
+-  weather lr:
+- 

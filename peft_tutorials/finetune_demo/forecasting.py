@@ -13,8 +13,8 @@ from tqdm import tqdm
 import argparse
 from functools import partial
 from momentfm.utils.utils import control_randomness
-# from momentfm.data.informer_dataset import InformerDataset
-from tutorials.data_load_demo.dataloader import InformerDataset
+# from tutorials.data_load_demo.dataloader import InformerDataset
+from momentfm_hand.data.informer_dataset import InformerDataset
 from momentfm.utils.forecasting_metrics import get_forecasting_metrics
 from peft import get_peft_config, get_peft_model, LoraConfig, TaskType, AdaLoraConfig
 
@@ -29,10 +29,11 @@ class MOMENT_PEFT_Trainer:
         self.epochs = epochs
         self.output_path = output_path
         self.train_dataset = InformerDataset(data_split="train", random_seed=seed,
-                                             forecast_horizon=self.forecast_horizon)
+                                             forecast_horizon=self.forecast_horizon, data_file='../../data/ETTh1.csv')
         self.train_loader = DataLoader(self.train_dataset, batch_size=self.batch_size, shuffle=True)
 
-        self.test_dataset = InformerDataset(data_split="test", random_seed=seed, forecast_horizon=self.forecast_horizon)
+        self.test_dataset = InformerDataset(data_split="test", random_seed=seed,
+                                            forecast_horizon=self.forecast_horizon,data_file='../../data/ETTh1.csv')
         self.test_loader = DataLoader(self.test_dataset, batch_size=self.batch_size, shuffle=True)
         # create log file to store training logs
         if not os.path.exists(self.output_path):
@@ -114,6 +115,7 @@ class MOMENT_PEFT_Trainer:
             self.model = get_peft_model(self.model, lora_config)
             print('LoRA enabled')
             self.model.print_trainable_parameters()
+            print(self.model)
 
         # 加载lora模块
         if self.mode == 'AdaLoRA':

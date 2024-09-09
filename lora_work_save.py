@@ -35,7 +35,7 @@ def load_weights(model, state_dict_file = '/hy-tmp/better464/MOMENT-1-large/pyto
     filtered_state_dict = {k: v for k, v in state_dict.items() if 'lora_' not in k}
 
     # 处理加载状态字典
-    for name, param in  model.named_parameters():
+    for name, param in model.named_parameters():
         if name in filtered_state_dict:
             # 检查形状是否匹配
             if filtered_state_dict[name].size() != param.size():
@@ -217,23 +217,31 @@ class MOMENT_Trainer:
                                             'target_modules': ["q", "v"],
                                             'lora_dropout': 0.03,
                                         })
-
-            # self.model.init()
+            self.model.init()
             # 把参数加载到我们的模型中去
             load_weights(self.model)
-            # lora部分的参数是可修改的  这里需要修改
-            # mark_only_lora_as_trainable(self.model)  # 这个会导致 grad为None 加载的程序得重写
+            # 添加了这个部分，会导致部分反串梯度为None
             for n, p in self.model.named_parameters():
-                if 'lora_' not in n:
-                    p.requires_grad = False
-                else:
-                    p.requires_grad = True
+                # 设置这个为True 所有的都有梯度
+                p.requires_grad = True
+
+                # if 'lora_' not in n:
+                #     p.requires_grad = False
+                # else:
+                #     p.requires_grad = True
+                if not p.requires_grad:
+                    print(n)
+            # lora部分的参数是可修改的  这里需要修改
+            # lora.mark_only_lora_as_trainable(self.model)  # 这个会导致 grad为None 加载的程序得重写
             # 测试
             # self.model.patch_embedding.value_embedding.weight.requires_grad = False
             # head部分修改为可修改的
             # mark_head_as_trainable(self.model)
 
         self.model.init()
+
+        self.model.train()
+
         print(self.model)
         print('Model initialized, training mode: ', self.mode)
         print("Unfrozen parameters:")
@@ -244,8 +252,17 @@ class MOMENT_Trainer:
         self.criterion = torch.nn.MSELoss()
 
         if self.mode in ('linear_probing','zero_shot', 'full_tuning', 'LoRA', 'AdaLoRA'):
+            params = []
+            for n, p in self.model.named_parameters():
+                if 'lora_' in n:
+                    print(n)
+                    params += [{'params':[p]}]
+
+            self.optimizer = torch.optim.Adam(params, lr=1e-4) # 只会更新优化器中的梯度
             # self.optimizer = torch.optim.Adam(self.model.parameters(), lr=1e-4)
-            self.optimizer = torch.optim.Adam(filter(lambda p: p.requires_grad,self.model.parameters()), lr=1e-4)
+            # self.optimizer = torch.optim.Adam(filter(lambda p: p.requires_grad,self.model.parameters()), lr=1e-4)
+            # 方式2
+            # self.optimizer = torch.optim.Adam(self.model.encoder.block[0].layer[0].parameters(), lr=1e-4)
             # Create a OneCycleLR scheduler
             max_lr = 1e-4
             total_steps = len(self.train_loader) * self.epochs
@@ -474,18 +491,18 @@ if __name__ == "__main__":
     #                            'lora_dropout': 0.03,
     #                        })
     # model.init()
-    # # 把参数加载到我们的模型中去
-    # load_weights(model)
-    # # lora部分的参数是可修改的
-    # lora.mark_only_lora_as_trainable(model)
-    # # head部分修改为可修改的
-    # mark_head_as_trainable(model)
-    # # print(model)
+    # # # 把参数加载到我们的模型中去
+    # # load_weights(model)
+    # # # lora部分的参数是可修改的
+    # # lora.mark_only_lora_as_trainable(model)
+    # # # head部分修改为可修改的
+    # # mark_head_as_trainable(model)
+    # print(model)
     # total_params_info, params_list = get_pytorch_model_info(model)
     # # print(params_list)
     # ret_dict = filter_dic(params_list)
 
-
+    #
     seed = 13
     control_randomness(seed)
     batch_size = 16

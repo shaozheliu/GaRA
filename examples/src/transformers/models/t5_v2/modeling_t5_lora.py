@@ -375,15 +375,24 @@ class T5Attention(nn.Module):
                                  lora_dropout=config.lora_dropout, bias=False)
             self.o = lora.Linear(self.inner_dim, self.d_model, r=config.r, lora_alpha= config.lora_alpha,
                                  lora_dropout=config.lora_dropout, bias=False)
-        elif config.lora_mode == 'AdaLoRA':
+        elif config.lora_mode in ('MyLoRA_fix'):
+            self.q = adalora.SVDLinear_new(self.d_model, self.inner_dim, r=config.r, lora_alpha=config.lora_alpha,
+                                       lora_dropout=config.lora_dropout, bias=False)
+            self.k = adalora.SVDLinear_new(self.d_model, self.inner_dim, r=config.r, lora_alpha=config.lora_alpha,
+                                       lora_dropout=config.lora_dropout, bias=False)
+            self.v = adalora.SVDLinear_new(self.d_model, self.inner_dim, r=config.r, lora_alpha=config.lora_alpha,
+                                       lora_dropout=config.lora_dropout, bias=False)
+            self.o = adalora.SVDLinear_new(self.inner_dim, self.d_model, r=config.r, lora_alpha=config.lora_alpha,
+                                       lora_dropout=config.lora_dropout, bias=False)
+        elif config.lora_mode in ('AdaLoRA', 'MyLoRA_ran'):
             self.q = adalora.SVDLinear(self.d_model, self.inner_dim, r=config.r, lora_alpha=config.lora_alpha,
-                                 lora_dropout=config.lora_dropout, bias=False)
+                                           lora_dropout=config.lora_dropout, bias=False)
             self.k = adalora.SVDLinear(self.d_model, self.inner_dim, r=config.r, lora_alpha=config.lora_alpha,
-                                 lora_dropout=config.lora_dropout, bias=False)
+                                           lora_dropout=config.lora_dropout, bias=False)
             self.v = adalora.SVDLinear(self.d_model, self.inner_dim, r=config.r, lora_alpha=config.lora_alpha,
-                                 lora_dropout=config.lora_dropout, bias=False)
+                                           lora_dropout=config.lora_dropout, bias=False)
             self.o = adalora.SVDLinear(self.inner_dim, self.d_model, r=config.r, lora_alpha=config.lora_alpha,
-                                 lora_dropout=config.lora_dropout, bias=False)
+                                           lora_dropout=config.lora_dropout, bias=False)
 
         if self.has_relative_attention_bias:
             self.relative_attention_bias = nn.Embedding(self.relative_attention_num_buckets, self.n_heads)

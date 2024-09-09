@@ -49,7 +49,7 @@ try:
 except OptionalDependencyNotAvailable:
     pass
 else:
-    _import_structure["modeling_t5"] = [
+    _import_structure["modeling_t5_lora"] = [
         "T5_PRETRAINED_MODEL_ARCHIVE_LIST",
         "T5EncoderModel",
         "T5ForConditionalGeneration",

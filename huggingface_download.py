@@ -2,7 +2,7 @@ import os
 
 # 注意os.environ得在import huggingface库相关语句之前执行。
 os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
-# from huggingface_hub import hf_hub_download
+from huggingface_hub import hf_hub_download
 from momentfm import MOMENTPipeline
 
 def download_model(source_url, local_dir):

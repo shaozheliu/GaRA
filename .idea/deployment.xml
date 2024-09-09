@@ -3,10 +3,31 @@
   <component name="PublishConfigData" autoUpload="Always" serverName="root@i-1.gpushare.com:12549 password" remoteFilesAllowedToDisappearOnAutoupload="false" confirmBeforeUploading="false" autoUploadExternalChanges="true">
     <option name="confirmBeforeUploading" value="false" />
     <serverData>
+      <paths name="4090good">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="root@i-1.gpushare.com:12549 password">
         <serverdata>
           <mappings>
             <mapping deploy="/hy-tmp/moment" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="实验室">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/alk/moment" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="恒源云">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/hy-tmp/moment" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
