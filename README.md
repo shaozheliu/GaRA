@@ -5,7 +5,6 @@
 </div>
 
 
-
 ## Introduction
 
 * We propose GaRA, which evaluates the importance of the low-rank adaptation matrix and employs the importance score to suppress and activate gate parameters for rank allocation.
@@ -15,6 +14,8 @@
 ### Key Challenges:
 1. **Challenge 1**: Implementing the "suppression" and "activation" of parameters based on the importance of incremental matrices.
 2. **Challenge 2**: Ensuring that our importance evaluation method is robust and enhances generalizability.
+
+
 In this paper, we propose GaRA, a gated low-rank adaptation method that allows the model to adaptively update the gate parameters based on gradient importance during training. 
 
 ## Requirements
