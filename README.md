@@ -1,6 +1,6 @@
 # GaRA: Gated Low-rank Adaptation for Fine-tuning Time-series Foundation Models
 
-![Project Overview](model.png)
+![Project Overview](model.jpg)
 
 ## Introduction
 
