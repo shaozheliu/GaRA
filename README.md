@@ -1,7 +1,7 @@
 # GaRA: Gated Low-rank Adaptation for Fine-tuning Time-series Foundation Models
 
 <div align="center">
-    <img src="model.jpg" alt="Project Overview" width="50%" />
+    <img src="gara_main.png" alt="Project Overview" width="50%" />
 </div>
 
 
@@ -43,4 +43,3 @@ To train the model with the default settings, run the following command:
 ```bash
 python train.py --config config.json
 ```
-
