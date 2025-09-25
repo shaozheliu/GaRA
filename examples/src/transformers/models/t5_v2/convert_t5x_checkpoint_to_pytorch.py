@@ -231,3 +231,4 @@ if __name__ == "__main__":
     convert_t5x_checkpoint_to_pytorch(
         args.t5x_checkpoint_path, args.config_file, args.pytorch_dump_path, args.is_encoder_only
     )
+

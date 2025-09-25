@@ -58,3 +58,4 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
     convert_tf_checkpoint_to_pytorch(args.tf_checkpoint_path, args.config_file, args.pytorch_dump_path)
+

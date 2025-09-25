@@ -51,3 +51,4 @@ print(model.fc1.weight.grad)
 # # print("model.fc1.weight", model.fc1.weight)
 # # print("model.fc2.weight", model.fc2.weight)
 
+

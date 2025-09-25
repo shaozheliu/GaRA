@@ -7,3 +7,4 @@ class TASKS:
     FORECASTING: str = "forecasting"
     CLASSIFICATION: str = "classification"
     EMBED: str = "embedding"
+

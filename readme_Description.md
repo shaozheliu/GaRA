@@ -194,3 +194,4 @@ rm -rf ~/miniconda3/miniconda.sh
 --  EETh1  lr: 1e-3
 -  weather lr:
 - 
+

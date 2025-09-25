@@ -78,3 +78,4 @@ class ClassificationDataset:
         timeseries = np.pad(timeseries, (self.seq_len - timeseries_len, 0))
 
         return np.expand_dims(timeseries, axis=0), input_mask, labels
+

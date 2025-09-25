@@ -3,3 +3,4 @@ Model initialized, training mode:  full_tuning
 Epoch 1/1
 Train loss: 0.352
 Test Loss: 0.361| Test MSE: 0.362 | Test MAE: 0.395
+

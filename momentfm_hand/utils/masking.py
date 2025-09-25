@@ -113,3 +113,4 @@ class Masking:
         x = x.unfold(dimension=-1, size=self.patch_len, step=self.stride)
         mask = self._mask_patch_view(x, input_mask=input_mask)
         return self.convert_patch_to_seq_view(mask, self.patch_len).long()
+

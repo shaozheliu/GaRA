@@ -4295,3 +4295,4 @@ def get_disk_only_shard_files(device_map, sharded_metadata):
         files_content[filename].append(device_map[weight_name])
 
     return [fname for fname, devices in files_content.items() if set(devices) == {"disk"}]
+

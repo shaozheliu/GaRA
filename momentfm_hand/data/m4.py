@@ -130,3 +130,4 @@ def load_m4_info() -> pd.DataFrame:
     :return: Pandas DataFrame of M4Info.
     """
     return pd.read_csv(INFO_FILE_PATH)
+

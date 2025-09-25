@@ -174,3 +174,4 @@ class SyntheticDataset(nn.Module):
         y = y.unsqueeze(1)
 
         return y, c
+

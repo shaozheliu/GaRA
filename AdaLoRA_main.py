@@ -663,3 +663,4 @@ if __name__ == "__main__":
             trainer.train()
             trainer.log_file.close()
             torch.cuda.empty_cache()
+

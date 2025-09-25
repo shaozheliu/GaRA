@@ -42,3 +42,4 @@ def fit_svm(features: npt.NDArray, y: npt.NDArray, MAX_SAMPLES: int = 10000):
 
         grid_search.fit(features, y)
         return grid_search.best_estimator_
+

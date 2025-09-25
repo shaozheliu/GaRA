@@ -26,3 +26,4 @@ plt.legend()
 # plt.tight_layout()
 # plt.savefig('./masking-ratio.png', dpi=300, bbox_inches='tight')
 plt.show()
+

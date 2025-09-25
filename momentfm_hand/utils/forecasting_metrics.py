@@ -313,3 +313,4 @@ def get_forecasting_metrics(
         smape=smape(y=y, y_hat=y_hat, axis=axis, reduction=reduction),
         rmse=rmse(y=y, y_hat=y_hat, axis=axis, reduction=reduction),
     )
+

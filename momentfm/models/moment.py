@@ -607,3 +607,4 @@ def freeze_parameters(model):
         param.requires_grad = False
 
     return model
+

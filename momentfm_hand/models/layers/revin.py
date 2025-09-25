@@ -83,3 +83,4 @@ class RevIN(nn.Module):
         x = x * self.stdev
         x = x + self.mean
         return x
+
